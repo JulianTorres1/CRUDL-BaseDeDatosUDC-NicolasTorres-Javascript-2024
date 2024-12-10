@@ -1,5 +1,5 @@
-function helloworld () {
-    console.log('Hello world!');
-    };
+import { connectToDatabase } from './components/DB/DBController.js';
 
-helloworld();
+(async () => {
+    const isConnected = await connectToDatabase();
+})();
