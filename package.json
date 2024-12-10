@@ -1,0 +1,16 @@
+{
+  "name": "crudl-basededatosudc-nicolastorres-javascript-2024",
+  "version": "1.0.0",
+  "description": "Este es un programa tipo CRUDL basico como parte de la unidad #4 de la asignatura de base de datos 1 de la universidad de cartagena",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "node",
+    "CURDL",
+    "Postgres"
+  ],
+  "author": "Nicolas Julian Torres Torres",
+  "license": "MIT"
+}
