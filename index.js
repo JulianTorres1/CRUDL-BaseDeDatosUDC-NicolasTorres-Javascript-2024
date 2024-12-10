@@ -1,5 +1,11 @@
-import { connectToDatabase } from './components/DB/DBController.js';
+import { connectToDatabase, showTable, showOne } from './DB/DBController.js';
 
 (async () => {
-    const isConnected = await connectToDatabase();
+    const client = await connectToDatabase();
 })();
+
+(async () => {
+    // await showTable('vehiculos');
+    await showOne('vehiculos', 1);
+})();
+

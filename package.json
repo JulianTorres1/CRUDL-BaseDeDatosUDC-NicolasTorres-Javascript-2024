@@ -15,6 +15,7 @@
   "author": "Nicolas Julian Torres Torres",
   "license": "MIT",
   "dependencies": {
+    "crudl-basededatosudc-nicolastorres-javascript-2024": "file:",
     "pg": "^8.13.1"
   }
 }
