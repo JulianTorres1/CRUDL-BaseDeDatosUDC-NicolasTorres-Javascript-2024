@@ -54,24 +54,47 @@ export async function showTable(table) {
     }
 }
 
-export async function showOne(table, id) {
+export async function showOne(table, num_bastidor) {
     try {
-        // Consulta para obtener el registro por id
-        const query = `SELECT * FROM ${table} WHERE id = $1`;
+        // Consulta para obtener el registro por num_bastidor
+        const query = `SELECT * FROM ${table} WHERE num_bastidor = $1`;
         
-        // Ejecuta la consulta con el parámetro id
-        const result = await client.query(query, [id]);
+        // Ejecuta la consulta con el parámetro num_bastidor
+        const result = await client.query(query, [num_bastidor]);
 
         if (result.rows.length === 0) {
-            console.log(`No record found in table ${table} with id ${id}`);
+            console.log(`No record found in table ${table} with id ${num_bastidor}`);
             return null; // Retorna null si no se encuentra el registro
         }
 
-        console.log(`Showing record from table ${table} with id ${id}`);
+        console.log(`Showing record from table ${table} with id ${num_bastidor}`);
         console.table(result.rows); // Muestra la fila en formato tabla en la consola
         return result.rows[0]; // Devuelve el primer registro encontrado como un objeto
     } catch (err) {
-        console.error(`Failed to show record from table ${table} with id ${id}`, err);
+        console.error(`Failed to show record from table ${table} with num_bastidor ${num_bastidor}`, err);
+        throw err;
+    }
+}
+
+// inserta un registro en la tabla
+
+export async function insertRecord(table, record) {
+    try {
+        // Obtiene las claves y los valores del objeto record
+        const keys = Object.keys(record);
+        const values = Object.values(record);
+
+        // Construye la consulta SQL con los placeholders
+        const query = `INSERT INTO ${table} (${keys.join(', ')}) VALUES (${keys.map((_, i) => `$${i + 1}`).join(', ')}) RETURNING *`;
+
+        // Ejecuta la consulta con los valores de record
+        const result = await client.query(query, values);
+
+        console.log(`Record inserted into table ${table}`);
+        console.table(result.rows); // Muestra la fila insertada en formato tabla en la consola
+        return result.rows[0]; // Devuelve el registro insertado como un objeto
+    } catch (err) {
+        console.error(`Failed to insert record into table ${table}`, err);
         throw err;
     }
 }
