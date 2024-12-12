@@ -98,3 +98,87 @@ export async function insertRecord(table, record) {
         throw err;
     }
 }
+
+export async function updateRecord(table, num_bastidor, record) {
+    try {
+        const keys = Object.keys(record);
+        const values = Object.values(record);
+        const query = `UPDATE ${table} SET ${keys.map((key, i) => `${key} = $${i + 1}`).join(', ')} WHERE num_bastidor = $${keys.length + 1} RETURNING *`;
+
+        try {
+            const result = await client.query(query, [...values, num_bastidor]);
+
+            if (result.rows.length === 0) {
+                console.log(`No record found in table ${table} with num_bastidor ${num_bastidor}`);
+                return null; // Retorna null si no se encuentra el registro
+            }
+
+            console.log(`Record updated in table ${table} with num_bastidor ${num_bastidor}`);
+            console.table(result.rows); // Muestra la fila actualizada en formato tabla en la consola
+            return result.rows[0]; // Devuelve el registro actualizado como un objeto
+        } catch (err) {
+            console.error(`Failed to execute update query for table ${table} with num_bastidor ${num_bastidor}`, err);
+            throw err;
+        }
+    } catch (err) {
+        console.error(`Failed to update record in table ${table} with num_bastidor ${num_bastidor}`, err);
+        throw err;
+    }
+}
+
+export async function deleteRecord(table, num_bastidor) {
+    try {
+        const query = `DELETE FROM ${table} WHERE num_bastidor = $1 RETURNING *`;
+        const result = await client.query(query, [num_bastidor]);
+
+        if (result.rows.length === 0) {
+            console.log(`No record found in table ${table} with num_bastidor ${num_bastidor}`);
+            return null; // Retorna null si no se encuentra el registro
+        }
+
+        console.log(`Record deleted from table ${table} with num_bastidor ${num_bastidor}`);
+        console.table(result.rows); // Muestra la fila eliminada en formato tabla en la consola
+        return result.rows[0]; // Devuelve el registro eliminado como un objeto
+    } catch (err) {
+        console.error(`Failed to delete record from table ${table} with num_bastidor ${num_bastidor}`, err);
+        throw err;
+    }
+}
+
+export async function showTableOrderedByPriceDESC(table) {
+    try {
+        const query = `SELECT * FROM ${table} ORDER BY precio DESC`;
+        const result = await client.query(query);
+
+        if (result.rows.length === 0) {
+            console.log(`No records found in table ${table}`);
+            return []; // Retorna un array vacío si no se encuentran registros
+        }
+
+        console.log(`Showing table ${table} ordered by price`);
+        console.table(result.rows); // Muestra las filas en formato tabla en la consola
+        return result.rows; // Devuelve las filas de la tabla como un array de objetos
+    } catch (err) {
+        console.error(`Failed to show table ${table} ordered by price`, err);
+        throw err;
+    }
+}
+
+export async function showTableOrderedByPriceASC(table) {
+    try {
+        const query = `SELECT * FROM ${table} ORDER BY precio ASC`;
+        const result = await client.query(query);
+
+        if (result.rows.length === 0) {
+            console.log(`No records found in table ${table}`);
+            return []; // Retorna un array vacío si no se encuentran registros
+        }
+
+        console.log(`Showing table ${table} ordered by price`);
+        console.table(result.rows); // Muestra las filas en formato tabla en la consola
+        return result.rows; // Devuelve las filas de la tabla como un array de objetos
+    } catch (err) {
+        console.error(`Failed to show table ${table} ordered by price`, err);
+        throw err;
+    }
+}
