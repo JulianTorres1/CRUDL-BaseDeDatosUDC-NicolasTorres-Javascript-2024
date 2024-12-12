@@ -63,13 +63,6 @@ Este es un programa tipo CRUDL básico como parte de la unidad #4 de la asignatu
 
 ## Ejecución del Proyecto
 
-instalamos las dependecias necesarias de node con el siguente comando:
-
-```sh
-npm install
-
-```
-
 Para correr el proyecto en modo desarrollo, utiliza el siguiente comando:
 
 ```sh
