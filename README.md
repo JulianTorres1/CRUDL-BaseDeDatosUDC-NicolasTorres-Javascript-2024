@@ -25,7 +25,7 @@ Este es un programa tipo CRUDL básico como parte de la unidad #4 de la asignatu
 1. Asegúrate de tener PostgreSQL instalado y en funcionamiento.
 2. Crea una base de datos en PostgreSQL:
     ```sql
-    CREATE DATABASE nombre_de_tu_base_de_datos;
+    CREATE DATABASE Concesionarios;
     ```
 3. Ejecuta el script SQL para crear las tablas necesarias:
     ```sh
