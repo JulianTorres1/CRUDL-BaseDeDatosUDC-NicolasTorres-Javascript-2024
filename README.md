@@ -46,8 +46,19 @@ Este es un programa tipo CRUDL básico como parte de la unidad #4 de la asignatu
     id_servicio INT NOT NULL,
     fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (num_bastidor)
+    );
+    ```
 
-);
+4. Configura la conexión a la base de datos en tu proyecto:
+
+    ```js
+    const dbConfig = {
+        user: 'root',
+        host: 'localhost',
+        database: 'Concesionarios',
+        password: 'Delfin23',
+        port: 5432,
+    };
     ```
 
 ## Ejecución del Proyecto
