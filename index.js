@@ -123,6 +123,10 @@ while (isRuning) {
         case '7':
             await showTableOrderedByPriceASC('vehiculos');
             break;
+        case '8':
+            console.log('Saliendo...');
+            isRuning = false;
+            break;
         default:
             console.log('Opción no válida');
             break;
